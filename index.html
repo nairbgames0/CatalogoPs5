@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Configuración básica de caracteres (tildes, ñ) y vista adaptable a celulares/tablets -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Título que aparece en la pestaña del navegador -->
+    <title>Nairb Games - Catálogo PS5</title>
+    
+    <!-- Fuentes modernas estilo gamer importadas desde Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================================
+           VARIABLES DE COLOR Y ESTILOS BASE (TEMÁTICA PS5)
+           ========================================================= */
+        :root {
+            --color-fondo: #070a14;         /* Azul nocturno muy oscuro para el fondo */
+            --color-tarjeta: #101628;       /* Fondo elegante oscuro para cada tarjeta */
+            --color-ps5-azul: #00439c;      /* Azul profundo característico de PlayStation 5 */
+            --color-ps5-luz: #00d2ff;       /* Luz LED azul cian brillante estilo consola PS5 */
+            --color-blanco-ps5: #f8fafc;    /* Blanco puro de la carcasa de PS5 */
+            --color-texto: #ffffff;         /* Color blanco para textos principales */
+        }
+
+        /* Reseteo de márgenes y rellenos por defecto del navegador */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Diseño general del cuerpo de la página */
+        body {
+            background-color: var(--color-fondo);
+            /* Degradado radial con iluminación LED azul en la parte superior */
+            background-image: radial-gradient(circle at top center, #11244d 0%, #070a14 70%);
+            color: var(--color-texto);
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+        }
+
+        /* =========================================================
+           ENCABEZADO SUPERIOR (HEADER)
+           ========================================================= */
+        header {
+            text-align: center;
+            padding: 45px 20px 25px;
+            border-bottom: 2px solid rgba(0, 210, 255, 0.3);
+            background: rgba(7, 10, 20, 0.85);
+            backdrop-filter: blur(12px); /* Efecto vidrio esmerilado al bajar la página */
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        /* Título principal "NAIRB GAMES" con degradado blanco/azul neón */
+        header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--color-blanco-ps5), var(--color-ps5-luz), #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 28px rgba(0, 210, 255, 0.45);
+        }
+
+        header p {
+            color: #94a3b8;
+            margin-top: 8px;
+            font-size: 1.1rem;
+        }
+
+        /* =========================================================
+           CUADRÍCULA DEL CATÁLOGO (GRID)
+           ========================================================= */
+        .catalogo-contenedor {
+            max-width: 1280px;
+            margin: 45px auto;
+            padding: 0 20px;
+            /* Organiza las tarjetas en columnas automáticas según el ancho de pantalla */
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 32px;
+        }
+
+        /* =========================================================
+           TARJETA DE CADA JUEGO Y EFECTOS VISUALES
+           ========================================================= */
+        .juego-card {
+            background-color: var(--color-tarjeta);
+            border-radius: 16px;
+            overflow: hidden; /* Evita que la imagen sobresalga de las esquinas redondeadas */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            /* Transición suave para animación de elevación y luz LED */
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+        }
+
+        /* Efecto al pasar el cursor (mouse) sobre la tarjeta */
+        .juego-card:hover {
+            transform: translateY(-12px); /* Eleva la tarjeta hacia arriba */
+            border-color: var(--color-ps5-luz); /* Enciende el borde como el LED de PS5 */
+            box-shadow: 0 15px 38px rgba(0, 210, 255, 0.28); /* Resplandor exterior azul cian */
+        }
+
+        /* Marco de la imagen de presentación */
+        .imagen-contenedor {
+            position: relative;
+            width: 100%;
+            height: 365px;
+            overflow: hidden;
+            background-color: #04060d;
+        }
+
+        /* Estilo de la imagen de portada */
+        .imagen-contenedor img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ajusta la portada sin deformarla */
+            transition: transform 0.5s ease, filter 0.5s ease;
+        }
+
+        /* Efecto zoom y mayor nitidez en la imagen al pasar el mouse por la tarjeta */
+        .juego-card:hover .imagen-contenedor img {
+            transform: scale(1.1);
+            filter: brightness(1.08);
+        }
+
+        /* Etiqueta blanca con letras negras estilo caja oficial de PS5 */
+        .etiqueta-ps5 {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--color-blanco-ps5);
+            color: #050811;
+            font-weight: 800;
+            font-size: 0.78rem;
+            padding: 5px 13px;
+            border-radius: 6px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.7);
+            letter-spacing: 1.5px;
+            border-bottom: 3px solid var(--color-ps5-luz);
+        }
+
+        /* Contenedor de título, género y botones */
+        .juego-info {
+            padding: 22px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .juego-info h2 {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            color: #ffffff;
+        }
+
+        .juego-genero {
+            font-size: 0.85rem;
+            color: #8b9ec2;
+            margin-bottom: 20px;
+        }
+
+        /* =========================================================
+           BOTONES DE DESCARGA LLAMATIVOS
+           ========================================================= */
+        /* Agrupa uno o dos botones de forma ordenada */
+        .botones-grupo {
+            display: flex;
+            flex-direction: column;
+            gap: 10px; /* Espacio vertical entre Parte 1 y Parte 2 */
+        }
+
+        .btn-descargar {
+            display: inline-block;
+            width: 100%;
+            padding: 13px 18px;
+            background: linear-gradient(45deg, var(--color-ps5-azul), #0077ff);
+            color: white;
+            text-decoration: none; /* Elimina el subrayado típico de los enlaces */
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 119, 255, 0.4);
+        }
+
+        /* Efecto brillo LED al pasar el cursor sobre el botón */
+        .btn-descargar:hover {
+            background: linear-gradient(45deg, #0077ff, var(--color-ps5-luz));
+            color: #050811;
+            box-shadow: 0 0 24px var(--color-ps5-luz);
+            transform: scale(1.03);
+        }
+
+        /* Estilo complementario para distinguir visualmente el botón de Parte 2 */
+        .btn-parte2 {
+            background: linear-gradient(45deg, #062b66, #0055cc);
+            border: 1px solid rgba(0, 210, 255, 0.35);
+        }
+
+        /* =========================================================
+           PIE DE PÁGINA (FOOTER)
+           ========================================================= */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ENCABEZADO PRINCIPAL -->
+    <header>
+        <h1>NAIRB GAMES</h1>
+        <p>Catálogo Exclusivo de los Mejores Juegos de PlayStation 5</p>
+    </header>
+
+    <!-- CONTENEDOR DEL CATÁLOGO -->
+    <main class="catalogo-contenedor">
+
+        <!-- =========================================================
+             JUEGO 1: SILENT HILL 2 (1 BOTÓN DE DESCARGA)
+             ========================================================= -->
+        <article class="juego-card">
+            <div class="imagen-contenedor">
+                <span class="etiqueta-ps5">PS5</span>
+                <!-- Cambia el enlace en src="..." si deseas usar tu propia imagen -->
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFPIVKtyi5ujwfgBdD8gK527KyXtp0VL2oTjvz33nmFkhYWKsvOHFvOzY&s=10" onerror="this.src='https://upload.wikimedia.org/wikipedia/en/6/63/Silent_Hill_2_remake_cover_art.jpg'" alt="Portada Silent Hill 2">
+            </div>
+            <div class="juego-info">
+                <div>
+                    <h2>Silent Hill 2</h2>
+                    <p class="juego-genero">Terror Psicológico • Supervivencia</p>
+                </div>
+                <div class="botones-grupo">
+                    <!-- REEMPLAZA EL "#" DENTRO DE href="#" CON TU LINK DE DESCARGA -->
+                    <a href="https://linkoficial.transfernow.net/es/cld?utm_source=2025030214mBQic3" target="_blank" class="btn-descargar">⬇ Descargar</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- =========================================================
+             JUEGO 2: ASSASSIN'S CREED MIRAGE (1 BOTÓN DE DESCARGA)
+             ========================================================= -->
+        <article class="juego-card">
+            <div class="imagen-contenedor">
+                <span class="etiqueta-ps5">PS5</span>
+                <img src="https://upload.wikimedia.org/wikipedia/en/2/23/Assassin%27s_Creed_Mirage_cover.jpeg" alt="Portada Assassin's Creed Mirage">
+            </div>
+            <div class="juego-info">
+                <div>
+                    <h2>Assassin's Creed Mirage</h2>
+                    <p class="juego-genero">Acción • Sigilo • Aventura Histórica</p>
+                </div>
+                <div class="botones-grupo">
+                    <!-- REEMPLAZA EL "#" DENTRO DE href="#" CON TU LINK DE DESCARGA -->
+                    <a href="https://linkoficial.transfernow.net/es/cld?utm_source=202503027JrG5zrG" target="_blank" class="btn-descargar">⬇ Descargar</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- =========================================================
+             JUEGO 3: THE WITCHER 3: WILD HUNT (1 BOTÓN DE DESCARGA)
+             ========================================================= -->
+        <article class="juego-card">
+            <div class="imagen-contenedor">
+                <span class="etiqueta-ps5">PS5</span>
+                <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Witcher_3_cover_art.jpg" alt="Portada The Witcher 3: Wild Hunt">
+            </div>
+            <div class="juego-info">
+                <div>
+                    <h2>The Witcher 3: Wild Hunt</h2>
+                    <p class="juego-genero">RPG • Mundo Abierto • Fantasía</p>
+                </div>
+                <div class="botones-grupo">
+                    <!-- REEMPLAZA EL "#" DENTRO DE href="#" CON TU LINK DE DESCARGA -->
+                    <a href="https://linkoficial.transfernow.net/es/cld?utm_source=202502283UsByYrj" target="_blank" class="btn-descargar">⬇ Descargar</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- =========================================================
+             JUEGO 4: TEKKEN 8 (CON DOS BOTONES: PARTE 1 Y PARTE 2)
+             ========================================================= -->
+        <article class="juego-card">
+            <div class="imagen-contenedor">
+                <span class="etiqueta-ps5">PS5</span>
+                <img src="https://upload.wikimedia.org/wikipedia/en/b/b4/Tekken_8_cover_art.jpg" alt="Portada Tekken 8">
+            </div>
+            <div class="juego-info">
+                <div>
+                    <h2>Tekken 8</h2>
+                    <p class="juego-genero">Peleas • Arcade • Acción Competitiva</p>
+                </div>
+                <!-- Contenedor con los dos botones solicitados -->
+                <div class="botones-grupo">
+                    <!-- PON AQUÍ EL LINK DE LA PARTE 1 DENTRO DE href="..." -->
+                    <a href="https://gofile.io/d/IyqjWm" target="_blank" class="btn-descargar">⬇ Descargar Parte 1</a>
+                    
+                    <!-- PON AQUÍ EL LINK DE LA PARTE 2 DENTRO DE href="..." -->
+                    <a href="https://gofile.io/d/W172Yl" target="_blank" class="btn-descargar btn-parte2">⬇ Descargar Parte 2</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- =========================================================
+             JUEGO 5: GOD OF WAR RAGNARÖK (CON DOS BOTONES: PARTE 1 Y PARTE 2)
+             ========================================================= -->
+        <article class="juego-card">
+            <div class="imagen-contenedor">
+                <span class="etiqueta-ps5">PS5</span>
+                <img src="https://upload.wikimedia.org/wikipedia/en/e/ee/God_of_War_Ragnar%C3%B6k_cover.jpg" alt="Portada God of War Ragnarök">
+            </div>
+            <div class="juego-info">
+                <div>
+                    <h2>God of War Ragnarök</h2>
+                    <p class="juego-genero">Acción • Aventura • Mitología Nórdica</p>
+                </div>
+                <!-- Contenedor con los dos botones solicitados -->
+                <div class="botones-grupo">
+                    <!-- PON AQUÍ EL LINK DE LA PARTE 1 DENTRO DE href="..." -->
+                    <a href="https://linkoficial.transfernow.net/es/cld?utm_source=20250301tb4gxC21" target="_blank" class="btn-descargar">⬇ Descargar Parte 1</a>
+                    
+                    <!-- PON AQUÍ EL LINK DE LA PARTE 2 DENTRO DE href="..." -->
+                    <a href="https://linkoficial.transfernow.net/es/cld?utm_source=20250301aXYoqx9G" target="_blank" class="btn-descargar btn-parte2">⬇ Descargar Parte 2</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- =========================================================
+             JUEGO 6: MORTAL KOMBAT 1 (CON DOS BOTONES: PARTE 1 Y PARTE 2)
+             ========================================================= -->
+        <article class="juego-card">
+            <div class="imagen-contenedor">
+                <span class="etiqueta-ps5">PS5</span>
+                <img src="https://upload.wikimedia.org/wikipedia/en/5/5b/Mortal_Kombat_1_key_art.jpeg" alt="Portada Mortal Kombat 1">
+            </div>
+            <div class="juego-info">
+                <div>
+                    <h2>Mortal Kombat 1</h2>
+                    <p class="juego-genero">Peleas • Acción • Historia</p>
+                </div>
+                <!-- Contenedor con los dos botones solicitados -->
+                <div class="botones-grupo">
+                    <!-- PON AQUÍ EL LINK DE LA PARTE 1 DENTRO DE href="..." -->
+                    <a href="#" target="_blank" class="btn-descargar">⬇ Descargar Parte 1</a>
+                    
+                    <!-- PON AQUÍ EL LINK DE LA PARTE 2 DENTRO DE href="..." -->
+                    <a href="#" target="_blank" class="btn-descargar btn-parte2">⬇ Descargar Parte 2</a>
+                </div>
+            </div>
+        </article>
+
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer>
+        <p>© 2025 Nairb Games - Catálogo PlayStation 5. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
